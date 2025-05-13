@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "579535498112",
+    "project_id": "enlista-2469f",
+    "storage_bucket": "enlista-2469f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:579535498112:android:8b3782e480b8e68377af65",
+        "android_client_info": {
+          "package_name": "com.armaco.enlista"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8Dpuj-toPmcrAgSa1fm_umoRD0Qa3MSg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
