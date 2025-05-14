@@ -48,20 +48,6 @@ const TabsLayout = () => {
                 )
             }}
         />
-        <Tabs.Screen name='profile'
-            options={{
-                title: "Perfil",
-                headerShown: false,
-                tabBarIcon: ({color, focused}) => (
-                    <TabIcon
-                        icon="person"
-                        color={color}
-                        name="Perfil"
-                        focused={focused}
-                    />
-                )
-            }} 
-        />
 
         <Tabs.Screen name='tasks'
             options={{
@@ -83,7 +69,7 @@ const TabsLayout = () => {
                 headerShown: false,
                 tabBarIcon: ({color, focused}) => (
                     <TabIcon
-                        icon="car"
+                        icon="storefront"
                         color={color}
                         name="Super"
                         focused={focused}
@@ -91,7 +77,23 @@ const TabsLayout = () => {
                 )
             }}
         />
+         <Tabs.Screen name="shopCar"
+            options={{
+                title: "Carrito",
+                headerShown: false,
+                tabBarIcon: ({color, focused}) => (
+                    <TabIcon
+                        icon="cart-sharp"
+                        color={color}
+                        name="shopCar"
+                        focused={focused}
+                    />
+                )
+            }}
+        />
     </Tabs>
+    
+    
   )
 }
 
