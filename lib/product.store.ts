@@ -1,58 +1,73 @@
+// lib/lista.store.ts
 import { create } from 'zustand';
-import { obtenerTareas } from './firebase/tasks';
 
-type Product = {
-  id: number;
-  name: string;
-  quantity: number;
-};
+let productIdCounter = 1;
+let listIdCounter = 1;
 
-interface StoreProducts {
-    totalProducts: number;
-    products: Product[];
-    saveProductsInShopCar: (listProducts) => void;
-}
+const useStoreProduct = create<ListStore>((set) => ({
+lists: [],
+  
+  addList: (nameList) => {
+    const newList: List = {
+      id: listIdCounter++,
+      nameList,
+      products: [],
+    };
+    set((state) => ({ lists: [...state.lists, newList] }));
+  },
 
-const useStoreProduct = create<StoreProducts>((set) => ({
-    totalProducts: 0,
-    products: [],
-    saveProductsInShopCar: async (listProducts) => {
-        try {
-            console.log("listProducts: ", listProducts);
-            // Setear nuevos productos y total de productos
-            // a veces estara vacia la lista de productos
-            // en otras ocaciones tendra datos, ejeplo: [{"id": 1, "name": "Falda de res", "quantity": 1}]
-            // tendra entrada nueva de datos
-            // y cuando guarde debe de respetar los datos anteriores, ejemplo: [{"id": 1, "name": "Falda de res", "quantity": 1}, {"id": 2, "name": "Molida", "quantity": 1}]
-           
+  addProductToList: (listId, product) => {
+    set((state) => ({
+      lists: state.lists.map((list) =>
+        list.id === listId
+          ? {
+              ...list,
+              products: [...list.products, { ...product, id: productIdCounter++ }],
+            }
+          : list
+      ),
+    }));
+  },
 
-            set({
-                totalProducts: listProducts.length,
-                products:  listProducts,
-            });
+  removeProductFromList: (listId, productId) => {
+    set((state) => ({
+      lists: state.lists.map((list) =>
+        list.id === listId
+          ? {
+              ...list,
+              products: list.products.filter((p) => p.id !== productId),
+            }
+          : list
+      ),
+    }));
+  },
+  
+  updateProductQuantity: (listId, productId, delta) => {
+  set((state) => ({
+    lists: state.lists.map((list) =>
+      list.id === listId
+        ? {
+            ...list,
+            products: list.products.map((p) =>
+              p.id === productId
+                ? {
+                    ...p,
+                    quantity: Math.max(1, p.quantity + delta), // Nunca menos de 1
+                  }
+                : p
+            ),
+          }
+        : list
+    ),
+  }));
+  },
 
-            // let dataList = {};
-            // set((state) => {
 
-            //     if(state.products.length > 0) {
-                    
-            //         dataList = {
-            //             totalProducts: listProducts.length,
-            //             products: {...state.products, listProducts},
-            //         }
-            //     } else {
-            //         dataList = {
-            //             totalProducts: listProducts.length,
-            //             products:  listProducts,
-            //         }
-            //     }
-                    
-            //     return dataList;
-            // });
-        } catch (error) {
-            console.log("[product.store.ts][saveProductsInShopCar] | Error: ", error);
-        }
-    },
+  deleteList: (listId) => {
+    set((state) => ({
+      lists: state.lists.filter((list) => list.id !== listId),
+    }));
+  },
 }));
 
 export default useStoreProduct;

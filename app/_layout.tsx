@@ -27,7 +27,6 @@ const _layout = () => {
       <Stack>
         <Stack.Screen name="splashScreen" options={{ headerShown: false }} />
         <Stack.Screen name="screens/AddTask" options={{ headerShown: false }}/>
-        <Stack.Screen name="screens/shopCategory/[id]" options={{ headerShown: false }}/>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       </Stack>
    </View>

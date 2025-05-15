@@ -77,20 +77,6 @@ const TabsLayout = () => {
                 )
             }}
         />
-         <Tabs.Screen name="shopCar"
-            options={{
-                title: "Carrito",
-                headerShown: false,
-                tabBarIcon: ({color, focused}) => (
-                    <TabIcon
-                        icon="cart-sharp"
-                        color={color}
-                        name="shopCar"
-                        focused={focused}
-                    />
-                )
-            }}
-        />
     </Tabs>
     
     
